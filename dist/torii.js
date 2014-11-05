@@ -1,6 +1,6 @@
 /**
  * Torii version: 0.2.1
- * Built: Wed Oct 01 2014 23:06:49 GMT-0400 (EDT)
+ * Built: Wed Nov 05 2014 01:49:35 GMT-0500 (EST)
  */
 (function() {
 
@@ -1219,8 +1219,10 @@ define("torii/services/popup",
     var postMessageFixed;
     var postMessageDomain = window.location.protocol+'//'+window.location.host;
     var postMessagePrefix = "__torii_message:";
-    // in IE11 window.attachEvent was removed.
-    if (window.attachEvent) {
+
+    var isIE = (window.navigator.userAgent.indexOf("MSIE ") > -1) || (window.navigator.userAgent.indexOf("Trident/") > -1);
+
+    if (isIE) {
       postMessageFixed = function postMessageFixed(win, data) {
         win.postMessageWithFix(postMessagePrefix+data, postMessageDomain);
       };
